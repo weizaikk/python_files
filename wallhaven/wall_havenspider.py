@@ -14,12 +14,12 @@ class Spider():
             "user-agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36"}
         self.Filepath = 'E:/python_project/wallhaven/' + keyword + '/'
 
-    def create_file(self):
+    def create_file(self):                             #文件保存路径
         Filepath = self.Filepath
         if not os.path.exists(Filepath):
             os.makedirs(Filepath)
 
-    def get_pagenum(self):
+    def get_pagenum(self):                             #获取搜索到的图片数量
         url = 'https://alpha.wallhaven.cc/search?q={}&search_image='.format(keyword)
         response = requests.get(url)
         html = etree.HTML(response.text)
@@ -27,14 +27,14 @@ class Spider():
         pagenum = re.sub("\D", "", pageInfo)
         return pagenum
 
-    def get_piclinks(self, number):
+    def get_piclinks(self, number):                    #图片URL地址
         url = 'https://alpha.wallhaven.cc/search?q={}&search_image=&page={}'.format(keyword, number)
         response = requests.get(url, headers=self.headers)
         html = etree.HTML(response.text)
         piclinks = html.xpath('//a[@class="jsAnchor thumb-tags-toggle tagged"]/@href')
         return piclinks
 
-    def load_pics(self, url):
+    def load_pics(self, url):                            #下载图片
         picindex = url.split("/")[4]
         pic_path = self.Filepath + keyword + picindex + ".jpg"
         imageurl = 'https://alpha.wallhaven.cc/wallpapers/thumb/small/th-{}.jpg'.format(picindex)
