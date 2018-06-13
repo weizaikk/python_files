@@ -3,7 +3,7 @@ def climb_stair(number):
         return number
     currt = 2
     prevt = 1
-    for _ in range(3, number + 1):
+    for _ in range(3, number + 1):              #递归
         currt, prevt  = prevt + currt, currt
         
     return currt
