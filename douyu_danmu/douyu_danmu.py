@@ -28,8 +28,8 @@ back_color = imread('Penguins.jpg')
 # socket接收内容的正则pattern
 danmu_pattern = re.compile(b'txt@=(.+?)/cid@')
 uid_pattern = re.compile(b'uid@=(.+?)/nn@')
-nickname_pattern = re.compile(b'nn@=(.+?)/txt@')
-level_pattern = re.compile(b'level@=([1-9][0-9]?)/sahf')
+nickname_pattern = re.compile(b'/nn@=(.+?)/')
+level_pattern = re.compile(b'level@=([1-9][0-9]?)/')
 
 
 # 发送数据包
@@ -153,5 +153,10 @@ if __name__ == '__main__':
     p2 = multiprocessing.Process(target=keeplive)
     p1.start()
     p2.start()
-    draw_wordcloud()
+    flag = input('是否生成词云(Y/N)\n')
+    if flag == 'Y':
+        draw_wordcloud()
+    
+
+
 
