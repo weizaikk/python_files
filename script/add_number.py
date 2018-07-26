@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 
-
+#在图片上加类似于消息接收的数字
 def add_number(im):
     image = ImageDraw.Draw(im)
     font = ImageFont.truetype("C:/Windows/Fonts/Arial.ttf", size=20)
